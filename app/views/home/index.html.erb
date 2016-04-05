@@ -1,0 +1,43 @@
+<%= render :partial => 'navbar' %>
+
+<h1>KIMCHI MASTER</h1>
+<% if user_signed_in? %>
+<%= current_user.name %>
+<%= current_user.inspect %>
+
+<a href="/users/sign_out"><h3>로그아웃하러가기</h3></a>
+<% else %>
+<a href="/users/sign_in"><h3>로그인하러가기</h3></a>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>session</th>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.user.name %></td>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>
