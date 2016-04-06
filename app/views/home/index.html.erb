@@ -1,5 +1,12 @@
 <%= render :partial => 'navbar' %>
 
+
+<div><% if @blongs == true %>
+  <td><a href="/blogs/<%= @blogs.id %>"><%= @blogs.title %></td></a>
+  <td><iframe width="560" height="315" src="<%= @blogs.youtube %>" frameborder="0" allowfullscreen></iframe></td>
+</div><% end %>
+
+
 <h1>KIMCHI MASTER</h1>
 <% if user_signed_in? %>
 <%= current_user.name %>

@@ -1,0 +1,54 @@
+<%= render :partial => 'home/navbar' %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Blogs</h1>
+
+<%= render 'form' %>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+
+      <th>Youtube</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.title %></td>
+        <td><%= blog.content %></td>
+        <td><%= blog.created_at.year %></td>
+        <td><%= blog.created_at.month %></td>
+        <td><%= blog.created_at.day %></td>
+
+        <td><iframe width="560" height="315" src="<%= blog.youtube %>" frameborder="0" allowfullscreen></iframe></td>
+        <td><%= link_to 'Show', blog %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <tr>
+        <td><%= render '/comments/form' %></td>
+      </tr>
+      <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.mention %></td>
+        <td><%= comment.user.name %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blog', new_blog_path %>

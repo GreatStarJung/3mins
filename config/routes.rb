@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :blogs
+  mount Ckeditor::Engine => '/ckeditor'
   resources :posts
   devise_for :users
   devise_for :models
