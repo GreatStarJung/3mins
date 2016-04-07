@@ -1,10 +1,11 @@
 <%= render :partial => 'navbar' %>
 
-
-<div><% if @blongs == true %>
-  <td><a href="/blogs/<%= @blogs.id %>"><%= @blogs.title %></td></a>
-  <td><iframe width="560" height="315" src="<%= @blogs.youtube %>" frameborder="0" allowfullscreen></iframe></td>
-</div><% end %>
+  <% if @blogs != nil %>
+  <div>
+    <td><a href="/blogs/<%= @blogs.id %>"><%= @blogs.title %></td></a>
+    <td><iframe width="560" height="315" src="<%= @blogs.youtube %>" frameborder="0" allowfullscreen></iframe></td>
+  </div>
+  <% end %>
 
 
 <h1>KIMCHI MASTER</h1>
@@ -44,7 +45,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>

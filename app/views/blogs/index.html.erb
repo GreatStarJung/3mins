@@ -37,12 +37,34 @@
         <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <tr>
-        <td><%= render '/comments/form' %></td>
+        <td><%= form_for(@comment) do |f| %>
+            <% if @comment.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+              <ul>
+              <% @comment.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= f.hidden_field :blog_id, :value=> blog.id %>
+          <div class="field">
+            <%= f.label :mention %><br>
+            <%= f.text_field :mention %>
+          </div>
+          <div class="actions">
+            <%= f.submit %>
+          </div>
+        <% end %>
+      </td>
       </tr>
-      <% @comments.each do |comment| %>
+      <% blog.comments.each do |comment| %>
       <tr>
         <td><%= comment.mention %></td>
         <td><%= comment.user.name %></td>
+        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
